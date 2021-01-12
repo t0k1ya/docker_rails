@@ -25,3 +25,6 @@ RUN bundle install
 
 
 ADD . $APP_ROOT
+
+RUN mkdir -p tmp/sockets
+RUN mkdir -p tmp/pids
