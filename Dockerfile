@@ -26,5 +26,7 @@ RUN bundle install
 
 ADD . $APP_ROOT
 
+# bundler: failed to load command: puma (/usr/local/bundle/bin/puma)
+# 上記エラー発生は以下のディレクトリがないから。これ動いてる？
 RUN mkdir -p tmp/sockets
 RUN mkdir -p tmp/pids
