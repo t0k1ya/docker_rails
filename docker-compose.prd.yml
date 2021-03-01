@@ -1,0 +1,44 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data #MacOSの場合
+    environment:
+      POSTGRES_USER: 'admin'
+      POSTGRES_PASSWORD: 'admin-pass'
+    restart: always
+  app:
+    build: .
+    image: rails
+    container_name: 'app'
+    command: bundle exec puma -C config/puma.rb
+    #command: bundle exec rails s -p 80 -b '0.0.0.0'
+    #command: bash -c "bundle exec puma -C config/puma.rb"
+    #ports:
+    # - "80:80"
+    environment:
+     RAILS_ENV: production
+    volumes:
+      - ./src:/app/src
+      - public-data:/app/src/public
+      - tmp-data:/app/src/tmp
+      - log-data:/app/src/log
+    depends_on:
+      - postgres
+    restart: always
+  web:
+    build: nginx
+    volumes:
+      - public-data:/app/src/public
+      - tmp-data:/app/src/tmp
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+volumes:
+  public-data:
+  tmp-data:
+  log-data:
