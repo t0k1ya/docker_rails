@@ -15,17 +15,12 @@ services:
     image: rails
     container_name: 'app'
     command: bundle exec puma -C config/puma.rb
-    #command: bundle exec rails s -p 80 -b '0.0.0.0'
-    #command: bash -c "bundle exec puma -C config/puma.rb"
-    #ports:
-    # - "80:80"
-    #environment:
-    #  VIRTUAL_PORT: 80
     volumes:
       - ./src:/app/src
       - public-data:/app/src/public
       - tmp-data:/app/src/tmp
       - log-data:/app/src/log
+      - node-modules:/app/src/node_modules
     depends_on:
       - postgres
     restart: always
@@ -42,3 +37,4 @@ volumes:
   public-data:
   tmp-data:
   log-data:
+  node-modules:
