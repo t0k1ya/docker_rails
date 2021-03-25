@@ -26,6 +26,7 @@ services:
       - public-data:/app/src/public
       - tmp-data:/app/src/tmp
       - log-data:/app/src/log
+      - node-modules:/app/src/node_modules
     depends_on:
       - postgres
     restart: always
@@ -42,3 +43,4 @@ volumes:
   public-data:
   tmp-data:
   log-data:
+  node-modules:
