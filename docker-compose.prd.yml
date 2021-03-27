@@ -15,10 +15,6 @@ services:
     image: rails
     container_name: 'app'
     command: bundle exec puma -C config/puma.rb
-    #command: bundle exec rails s -p 80 -b '0.0.0.0'
-    #command: bash -c "bundle exec puma -C config/puma.rb"
-    #ports:
-    # - "80:80"
     environment:
      RAILS_ENV: production
     volumes:
